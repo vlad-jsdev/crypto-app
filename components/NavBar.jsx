@@ -41,7 +41,7 @@ const NavBar = () => (
               key={item.name}
               name={item.name}
               href={item.href}
-              buttonStyles="font-medium text-gray-500 hover:text-gray-100 p-4 rounded-full hover:bg-gray-900"
+              buttonStyles="font-medium text-gray-500 hover:text-black dark:hover:text-gray-100 p-4 rounded-full dark:hover:bg-gray-900 hover:bg-gray-200"
             />
           ))}
           <MenuButton

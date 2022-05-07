@@ -2,22 +2,23 @@ import Image from "next/image";
 import NavBar from "../components/NavBar";
 import MainPage from "./MainPage";
 import Footer from "../components/Footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  useEffect(() => {
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
+  const [theme, setTheme] = useState("light");
+  // useEffect(() => {
+  //   if (
+  //     localStorage.theme === "dark" ||
+  //     (!("theme" in localStorage) &&
+  //       window.matchMedia("(prefers-color-scheme: dark)").matches)
+  //   ) {
+  //     document.documentElement.classList.add("dark");
+  //   } else {
+  //     document.documentElement.classList.remove("dark");
+  //   }
+  // }, []);
   return (
-    <div>
+    <div className={theme}>
       {/*<Head />*/}
       <main className="flex flex-col bg-white dark:bg-gray-700 h-screen">
         <NavBar />

@@ -8,7 +8,8 @@ const MainPage = () => (
   <main className="flex flex-grow  my-auto max-w-7xl px-4 sm:my-12 sm:px-6 md:my-16 lg:my-20 lg:px-8 xl:my-28">
     <div className="sm:text-center lg:text-left">
       <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-        <span className="block xl:inline">Send Crypto</span> <br />
+        <span className="block xl:inline dark:text-gray-300">Send Crypto</span>{" "}
+        <br />
         <span className="block text-indigo-600 xl:inline">
           across the world
         </span>
@@ -25,15 +26,6 @@ const MainPage = () => (
         />
       </div>
     </div>
-    {/*<svg*/}
-    {/*  className="hidden lg:block absolute right-10  h-full text-white transform translate-x-1/2 z-50"*/}
-    {/*  fill="currentColor"*/}
-    {/*  viewBox="0 0 100 100"*/}
-    {/*  preserveAspectRatio="none"*/}
-    {/*  aria-hidden="true"*/}
-    {/*>*/}
-    {/*  <polygon points="50,0 100,0 50,100 0,100" />*/}
-    {/*</svg>*/}
     <div className="hidden lg:block flex self-center w-1/2">
       <Image
         className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
@@ -41,15 +33,6 @@ const MainPage = () => (
         alt=""
       />
     </div>
-    {/*<svg*/}
-    {/*  className="hidden lg:block absolute right-16  h-full text-white  z-50"*/}
-    {/*  fill="currentColor"*/}
-    {/*  viewBox="0 0 100 100"*/}
-    {/*  preserveAspectRatio="none"*/}
-    {/*  aria-hidden="true"*/}
-    {/*>*/}
-    {/*  <polygon points="0 0, 0 100, 30 0" />*/}
-    {/*</svg>*/}
   </main>
 );
 
