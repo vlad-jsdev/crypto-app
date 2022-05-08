@@ -1,6 +1,6 @@
-const MenuButton = ({ key, href, name, buttonStyles }) => {
+const MenuButton = ({ href, name, buttonStyles }) => {
   return (
-    <a key={key} href={href} className={buttonStyles}>
+    <a href={href} className={buttonStyles}>
       {name}
     </a>
   );

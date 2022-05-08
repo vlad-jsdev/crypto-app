@@ -36,22 +36,21 @@ const NavBar = ({ theme, setTheme }) => (
             </div>
           </div>
         </div>
-        <ToggleMode theme={theme} setTheme={setTheme} />
         <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
           {navigation.map((item) => (
             <MenuButton
               key={item.name}
               name={item.name}
               href={item.href}
-              buttonStyles="font-medium text-gray-500 hover:text-black dark:hover:text-gray-100 p-4 rounded-full dark:hover:bg-gray-900 hover:bg-gray-200"
+              buttonStyles="font-medium my-auto text-gray-500 hover:text-black dark:hover:text-gray-100 p-4 rounded-full dark:hover:bg-gray-900 hover:bg-gray-200"
             />
           ))}
           <MenuButton
-            key="Login"
             name="Log in"
             href="#"
             buttonStyles="font-medium text-indigo-600 hover:text-white p-4 rounded-full hover:bg-indigo-600"
           />
+          <ToggleMode theme={theme} setTheme={setTheme} />
         </div>
       </nav>
     </div>

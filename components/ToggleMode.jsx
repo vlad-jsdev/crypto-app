@@ -6,13 +6,13 @@ const ToggleMode = ({ theme, setTheme }) => (
     data-tooltip-target="tooltip-toggle"
     type="button"
     onClick={() => setTheme(!theme)}
-    className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
+    className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-full text-sm p-2.5"
   >
     {theme ? (
       <>
         <svg
           id="theme-toggle-dark-icon"
-          className="w-5 h-5 hidden"
+          className="w-3 h-3 hidden"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@ const ToggleMode = ({ theme, setTheme }) => (
         </svg>
         <svg
           id="theme-toggle-light-icon"
-          className="w-5 h-5"
+          className="w-3 h-3"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ const ToggleMode = ({ theme, setTheme }) => (
       <>
         <svg
           id="theme-toggle-dark-icon"
-          className="w-5 h-5"
+          className="w-3 h-3"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +46,7 @@ const ToggleMode = ({ theme, setTheme }) => (
         </svg>
         <svg
           id="theme-toggle-light-icon"
-          className="hidden w-5 h-5"
+          className="hidden w-3 h-3"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
