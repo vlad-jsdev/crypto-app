@@ -3,6 +3,7 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { Fragment } from "react";
 import { buttonsMenu, buttonsTypes } from "../constants/styles";
 import MenuButton from "./MenuButton";
+import ToggleMode from "./ToggleMode";
 
 const navigation = [
   { name: "Cryptocurrency", href: "#" },
@@ -11,7 +12,7 @@ const navigation = [
   { name: "CryptoBot", href: "#" },
 ];
 
-const NavBar = () => (
+const NavBar = ({ theme, setTheme }) => (
   <Popover>
     <div className="relative py-6 px-4 sm:px-6 lg:px-8 dark:bg-gray-800">
       <nav
@@ -35,6 +36,7 @@ const NavBar = () => (
             </div>
           </div>
         </div>
+        <ToggleMode theme={theme} setTheme={setTheme} />
         <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
           {navigation.map((item) => (
             <MenuButton
