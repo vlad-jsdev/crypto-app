@@ -4,11 +4,11 @@ import MainPage from "./MainPage";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import useThemeDetector from "../utils/themeDetector";
+import { useAppContext } from "../context/TransactionContext";
 
 export default function Home() {
   const isDarkTheme = useThemeDetector();
   const [theme, setTheme] = useState();
-
   useEffect(() => {
     setTheme(isDarkTheme);
   }, [isDarkTheme]);
