@@ -5,7 +5,8 @@ import MenuButton from "../components/MenuButton";
 import { walletButton } from "../constants/styles";
 import { useAppContext } from "../context/TransactionContext";
 
-const MainPage = (props) => {
+const MainPage = () => {
+  const { currentAccount, connectWallet } = useAppContext();
   console.log(useAppContext());
 
   return (
@@ -29,6 +30,7 @@ const MainPage = (props) => {
             key="Connect wallet"
             href="#"
             buttonStyles="font-medium text-white py-4 px-6 rounded-full bg-indigo-600 hover:bg-indigo-400"
+            clickFunc={() => connectWallet()}
           />
         </div>
       </div>

@@ -1,6 +1,6 @@
-const MenuButton = ({ href, name, buttonStyles }) => {
+const MenuButton = ({ href, name, buttonStyles, clickFunc }) => {
   return (
-    <a href={href} className={buttonStyles}>
+    <a href={href} className={buttonStyles} onClick={() => clickFunc()}>
       {name}
     </a>
   );

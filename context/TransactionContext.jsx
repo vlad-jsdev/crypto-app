@@ -26,13 +26,46 @@ const getEthereumContract = () => {
 const AppContext = createContext();
 
 export function AppWrapper({ children }) {
+  const [currentAccount, setCurrentAccount] = useState();
   let sharedState = "text";
 
   const checkIfWalletIsConnected = async () => {
-    if (!ethereum) return alert("Please install metamask");
-    const accounts = await ethereum.request({ method: "eth_accounts" });
+    try {
+      if (!ethereum) return alert("Please install metamask");
+      const accounts = await ethereum.request({ method: "eth_accounts" });
+      if (accounts.length) {
+        setCurrentAccount(accounts[0]);
+        //getAllTransactions();
+      } else {
+        console.log("No Accounts");
+      }
+      setCurrentAccount(accounts[0]);
+      console.log(accounts);
+    } catch (error) {
+      console.log(error);
+      throw new Error("No ethereum object.");
+    }
+  };
+  const connectWallet = async () => {
+    try {
+      if (!ethereum) return alert("Please install metamask");
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      setCurrentAccount(accounts[0]);
+    } catch (error) {
+      console.log(error);
+      throw new Error("No ethereum object.");
+    }
+  };
 
-    console.log(accounts);
+  const sendTransaction = async () => {
+    try {
+      if (!ethereum) return alert("Please install metamask");
+    } catch (error) {
+      console.log(error);
+      throw new Error("No ethereum object.");
+    }
   };
   useEffect(() => {
     ethereum = window.ethereum;
@@ -46,7 +79,9 @@ export function AppWrapper({ children }) {
     // });
   }, []);
   return (
-    <AppContext.Provider value={sharedState}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ connectWallet, currentAccount }}>
+      {children}
+    </AppContext.Provider>
   );
 }
 
