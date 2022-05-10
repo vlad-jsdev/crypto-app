@@ -3,8 +3,6 @@ import { ethers } from "ethers";
 
 import { contractABI, contractAddress } from "../constants/contracts";
 
-// export const TransactionContext = createContext();
-
 let ethereum;
 
 const getEthereumContract = () => {
@@ -62,6 +60,8 @@ export function AppWrapper({ children }) {
   const sendTransaction = async () => {
     try {
       if (!ethereum) return alert("Please install metamask");
+
+      // get the data from the form...
     } catch (error) {
       console.log(error);
       throw new Error("No ethereum object.");
@@ -70,13 +70,6 @@ export function AppWrapper({ children }) {
   useEffect(() => {
     ethereum = window.ethereum;
     checkIfWalletIsConnected();
-    // let metaMask = new Promise((resolve, reject) => {
-    //   ethereum = window;
-    //   resolve();
-    // });
-    // metaMask.then(() => {
-    //   if (!ethereum) return alert("Please install metamask");
-    // });
   }, []);
   return (
     <AppContext.Provider value={{ connectWallet, currentAccount }}>

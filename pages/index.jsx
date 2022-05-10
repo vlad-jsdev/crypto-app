@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import useThemeDetector from "../utils/themeDetector";
 import { useAppContext } from "../context/TransactionContext";
+import FormSendCrypto from "../components/FormSendCrypto";
 
 export default function Home() {
   const isDarkTheme = useThemeDetector();
@@ -23,7 +24,7 @@ export default function Home() {
       {/*<Head />*/}
       <main className="flex flex-col bg-white dark:bg-gray-700 h-screen">
         <NavBar theme={theme} setTheme={setLocalTheme} />
-        <div className="max-w-7xl mx-auto  h-full">
+        <div className="max-w-7xl mx-auto h-full">
           <div className="flex flex-col z-10 pb-8 bg-white dark:bg-gray-700">
             <MainPage />
           </div>
