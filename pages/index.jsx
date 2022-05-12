@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <div className={theme ? "dark" : "light"}>
       {/*<Head />*/}
-      <main className="flex flex-col bg-white dark:bg-gray-700 h-screen">
+      <main className="flex flex-col bg-white dark:bg-gray-700">
         <NavBar theme={theme} setTheme={setLocalTheme} />
         <div className="max-w-7xl mx-auto h-full">
           <div className="flex flex-col z-10 pb-8 bg-white dark:bg-gray-700">

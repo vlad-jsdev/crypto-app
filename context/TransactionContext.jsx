@@ -8,7 +8,7 @@ let ethereum;
 const getEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(ethereum);
   const signer = provider.getSigner();
-  const transationContract = new ethers.Contract(
+  const transactionContract = new ethers.Contract(
     contractAddress,
     contractABI,
     signer
@@ -17,7 +17,7 @@ const getEthereumContract = () => {
   console.log({
     provider,
     signer,
-    transationContract,
+    transactionContract,
   });
 };
 
@@ -25,7 +25,17 @@ const AppContext = createContext();
 
 export function AppWrapper({ children }) {
   const [currentAccount, setCurrentAccount] = useState();
-  let sharedState = "text";
+  const [formData, setFormData] = useState({
+    addressTo: "",
+    amount: "",
+    keyword: "",
+    message: "",
+  });
+  const [transactionCount, setTransactionCount] = useState("");
+
+  const handleChange = (e, name) => {
+    setFormData((prevState) => ({ ...prevState, [name]: e.target.value }));
+  };
 
   const checkIfWalletIsConnected = async () => {
     try {
@@ -33,7 +43,7 @@ export function AppWrapper({ children }) {
       const accounts = await ethereum.request({ method: "eth_accounts" });
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
-        //getAllTransactions();
+        // getAllTransactions();
       } else {
         console.log("No Accounts");
       }
@@ -61,18 +71,55 @@ export function AppWrapper({ children }) {
     try {
       if (!ethereum) return alert("Please install metamask");
 
-      // get the data from the form...
+      const { addressTo, amount, keyword, message } = formData;
+      console.log("inside sendtrans");
+      const transactionContract = getEthereumContract();
+      const paesedAmount = ethers.utils.parseEther(amount);
+
+      await ethereum.request({
+        method: "eth_sendTransaction",
+        params: [
+          {
+            from: currentAccount,
+            to: addressTo,
+            gas: "0x5208", // 21000
+            value: paesedAmount._hex,
+          },
+        ],
+      });
+      const transactionHash = await transactionContract.addToBlockchain(
+        addressTo,
+        paesedAmount,
+        message,
+        keyword
+      );
+      console.log("Loading: ", transactionHash.hash);
+      await transactionHash.wait();
+      console.log("Success: ", transactionHash.hash);
+
+      const transactionCount = await transactionContract.getTransactionCount();
+      setTransactionCount(transactionCount.toNumber());
     } catch (error) {
       console.log(error);
       throw new Error("No ethereum object.");
     }
   };
   useEffect(() => {
+    setTransactionCount(localStorage.getItem("transactionCount"));
     ethereum = window.ethereum;
     checkIfWalletIsConnected();
   }, []);
   return (
-    <AppContext.Provider value={{ connectWallet, currentAccount }}>
+    <AppContext.Provider
+      value={{
+        connectWallet,
+        currentAccount,
+        handleChange,
+        setFormData,
+        formData,
+        sendTransaction,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

@@ -7,7 +7,7 @@ import { useAppContext } from "../context/TransactionContext";
 import FormSendCrypto from "../components/FormSendCrypto";
 
 const MainPage = () => {
-  const { currentAccount, connectWallet } = useAppContext();
+  const { connectWallet } = useAppContext();
   console.log(useAppContext());
 
   return (
