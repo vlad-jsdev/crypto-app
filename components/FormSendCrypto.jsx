@@ -17,79 +17,84 @@ const FormSendCrypto = () => {
     sendTransaction();
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="mb-6">
-        <label
-          htmlFor="addressTo"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+    <div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 drop-shadow-2xl sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <h5 className="py-4 text-xl font-medium text-gray-900 dark:text-white">
+        Send in one click
+      </h5>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-6">
+          <label
+            htmlFor="addressTo"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            Address to
+          </label>
+          <input
+            type="text"
+            id="addressTo"
+            name="addressTo"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            placeholder="Address to"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="amount"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            Amount (ETH)
+          </label>
+          <input
+            type="text"
+            id="amount"
+            name="amount"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="keyword"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            Keyword
+          </label>
+          <input
+            type="text"
+            id="keyword"
+            name="keyword"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="message"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            Message
+          </label>
+          <input
+            type="text"
+            id="message"
+            name="message"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          className="my-4 w-full text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
         >
-          Address to
-        </label>
-        <input
-          type="text"
-          id="addressTo"
-          name="addressTo"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Address to"
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="mb-6">
-        <label
-          htmlFor="amount"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >
-          Amount (ETH)
-        </label>
-        <input
-          type="text"
-          id="amount"
-          name="amount"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="mb-6">
-        <label
-          htmlFor="keyword"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >
-          Keyword
-        </label>
-        <input
-          type="text"
-          id="keyword"
-          name="keyword"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="mb-6">
-        <label
-          htmlFor="message"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >
-          Message
-        </label>
-        <input
-          type="text"
-          id="message"
-          name="message"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <button
-        type="submit"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        Send Now
-      </button>
-    </form>
+          Send Now
+        </button>
+      </form>
+    </div>
   );
 };
 

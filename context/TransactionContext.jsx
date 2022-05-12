@@ -64,6 +64,7 @@ export function AppWrapper({ children }) {
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
       });
+
       setCurrentAccount(accounts[0]);
     } catch (error) {
       console.log(error);
@@ -77,8 +78,6 @@ export function AppWrapper({ children }) {
 
       const { addressTo, amount, keyword, message } = formData;
       const transactionContract = getEthereumContract();
-
-      // console.log("DATA: ", { addressTo, amount, keyword, message });
 
       const parsedAmount = ethers.utils.parseEther(amount);
 

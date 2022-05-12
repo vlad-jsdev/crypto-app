@@ -5,9 +5,11 @@ import MenuButton from "../components/MenuButton";
 import { walletButton } from "../constants/styles";
 import { useAppContext } from "../context/TransactionContext";
 import FormSendCrypto from "../components/FormSendCrypto";
+import MetamaskIcon from "../assets/images/metamask.svg";
+import CryptoCard from "../components/CryptoCard";
 
 const MainPage = () => {
-  const { connectWallet } = useAppContext();
+  const { connectWallet, currentAccount } = useAppContext();
 
   return (
     <main className="flex flex-col  my-auto max-w-7xl px-4 sm:my-12 sm:px-6 md:my-16 lg:my-20 lg:px-8 xl:my-28">
@@ -26,13 +28,24 @@ const MainPage = () => {
             Buy, sell and exchange crypto around the world with small taxes.
           </p>
           <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-            <MenuButton
-              name="Connect wallet"
-              key="Connect wallet"
-              href="#"
-              buttonStyles="font-medium text-white py-4 px-6 rounded-full bg-indigo-600 hover:bg-indigo-400"
-              clickFunc={() => connectWallet()}
-            />
+            {currentAccount ? (
+              <MenuButton
+                name="Wallet is connected"
+                key="Wallet is connected"
+                href="#"
+                buttonStyles="inline font-medium text-white py-4 px-6 rounded-full bg-indigo-600 opacity-75"
+                icon={MetamaskIcon}
+              />
+            ) : (
+              <MenuButton
+                name="Connect wallet"
+                key="Connect wallet"
+                href="#"
+                buttonStyles="inline font-medium text-white py-4 px-6 rounded-full bg-indigo-600 hover:bg-indigo-400"
+                icon={MetamaskIcon}
+                clickFunc={() => connectWallet()}
+              />
+            )}
           </div>
         </div>
         <div className="hidden lg:block flex self-center w-1/2">
@@ -44,7 +57,9 @@ const MainPage = () => {
         </div>
       </div>
       <div className="flex">
-        <div className="flex-1"></div>
+        <div className="flex-1 p-6 m-auto">
+          <CryptoCard />
+        </div>
         <div className="flex-1 p-6 m-4">
           <FormSendCrypto />
         </div>
