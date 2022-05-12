@@ -3,6 +3,8 @@ import { ethers } from "ethers";
 
 import { contractABI, contractAddress } from "../constants/contracts";
 
+const AppContext = createContext();
+
 let ethereum;
 
 const getEthereumContract = () => {
@@ -13,18 +15,17 @@ const getEthereumContract = () => {
     contractABI,
     signer
   );
+  // console.log({
+  //   provider,
+  //   signer,
+  //   transactionContract,
+  // });
 
-  console.log({
-    provider,
-    signer,
-    transactionContract,
-  });
+  return transactionContract;
 };
 
-const AppContext = createContext();
-
 export function AppWrapper({ children }) {
-  const [currentAccount, setCurrentAccount] = useState();
+  const [currentAccount, setCurrentAccount] = useState("");
   const [formData, setFormData] = useState({
     addressTo: "",
     amount: "",
@@ -72,10 +73,10 @@ export function AppWrapper({ children }) {
       if (!ethereum) return alert("Please install metamask");
 
       const { addressTo, amount, keyword, message } = formData;
-      console.log("inside sendtrans");
       const transactionContract = getEthereumContract();
-      const paesedAmount = ethers.utils.parseEther(amount);
+      const parsedAmount = ethers.utils.parseEther(amount);
 
+      console.log("AAAAAAA");
       await ethereum.request({
         method: "eth_sendTransaction",
         params: [
@@ -83,13 +84,13 @@ export function AppWrapper({ children }) {
             from: currentAccount,
             to: addressTo,
             gas: "0x5208", // 21000
-            value: paesedAmount._hex,
+            value: parsedAmount._hex,
           },
         ],
       });
       const transactionHash = await transactionContract.addToBlockchain(
         addressTo,
-        paesedAmount,
+        parsedAmount,
         message,
         keyword
       );
