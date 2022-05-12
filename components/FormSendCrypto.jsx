@@ -6,12 +6,13 @@ const FormSendCrypto = () => {
 
   const handleSubmit = (e) => {
     const { addressTo, amount, keyword, message } = formData;
+
     e.preventDefault();
-    // if (!addressTo || !amount || !keyword || !message) {
-    //   console.log({ addressTo, amount, keyword, message });
-    //
-    //   return;
-    // }
+    console.log({ addressTo, amount, keyword, message });
+
+    if (!addressTo || !amount || !keyword || !message) {
+      return;
+    }
 
     sendTransaction();
   };

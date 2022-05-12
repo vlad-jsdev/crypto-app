@@ -34,8 +34,11 @@ export function AppWrapper({ children }) {
   });
   const [transactionCount, setTransactionCount] = useState("");
 
-  const handleChange = (e, name) => {
-    setFormData((prevState) => ({ ...prevState, [name]: e.target.value }));
+  const handleChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const checkIfWalletIsConnected = async () => {
@@ -74,9 +77,11 @@ export function AppWrapper({ children }) {
 
       const { addressTo, amount, keyword, message } = formData;
       const transactionContract = getEthereumContract();
+
+      // console.log("DATA: ", { addressTo, amount, keyword, message });
+
       const parsedAmount = ethers.utils.parseEther(amount);
 
-      console.log("AAAAAAA");
       await ethereum.request({
         method: "eth_sendTransaction",
         params: [
