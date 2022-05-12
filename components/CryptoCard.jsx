@@ -24,7 +24,7 @@ const CryptoCard = () => {
         <div className="pt-1">
           <p className="font-light">Wallet Number</p>
           <p className="font-medium text-xs tracking-more-wider">
-            {currentAccount}
+            {currentAccount ? currentAccount : "Not connected"}
           </p>
         </div>
         <div className="pt-6 pr-6">
