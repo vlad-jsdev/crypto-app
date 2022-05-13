@@ -1,6 +1,7 @@
 import { useAppContext } from "../context/TransactionContext";
 import EthIcon from "../assets/images/ethereum.svg";
 import MetamaskIcon from "../assets/images/metamask.svg";
+import CardBg from "../assets/images/card-bg.png";
 
 const CryptoCard = () => {
   const { currentAccount } = useAppContext();
@@ -9,7 +10,7 @@ const CryptoCard = () => {
     <div className="w-96 h-56 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110">
       <img
         className="relative object-cover w-full h-full rounded-xl"
-        src="https://i.imgur.com/kGkSg1v.png"
+        src={CardBg.src}
       />
 
       <div className="w-full px-8 absolute top-8">

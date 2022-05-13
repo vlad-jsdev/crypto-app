@@ -7,9 +7,11 @@ import { useAppContext } from "../context/TransactionContext";
 import FormSendCrypto from "../components/FormSendCrypto";
 import MetamaskIcon from "../assets/images/metamask.svg";
 import CryptoCard from "../components/CryptoCard";
+import { useEffect, useState } from "react";
 
 const MainPage = () => {
-  const { connectWallet, currentAccount } = useAppContext();
+  const { connectWallet, currentAccount, coinName } = useAppContext();
+  console.log("CoinName: ", coinName);
 
   return (
     <main className="flex flex-col  my-auto max-w-7xl px-4 sm:my-12 sm:px-6 md:my-16 lg:my-20 lg:px-8 xl:my-28">

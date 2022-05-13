@@ -2,7 +2,7 @@ import styles from "../styles/Home.module.css";
 import Image from "next/image";
 
 const Footer = () => (
-  <footer className="inset-x-0 bottom-0 p-4 bg-white sm:p-6 dark:bg-gray-800">
+  <footer className="inset-x-0 bottom-0 p-4 bg-white sm:p-6 dark:bg-gray-800 bg-gray-100">
     <div className="max-w-7xl mx-auto md:flex md:justify-between">
       <div className="mb-6 md:mb-0">
         <a href="https://flowbite.com" className="flex items-center">

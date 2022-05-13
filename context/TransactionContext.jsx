@@ -26,11 +26,11 @@ const getEthereumContract = () => {
 
 export function AppWrapper({ children }) {
   const [currentAccount, setCurrentAccount] = useState("");
+  const [coinName, setCoinName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     addressTo: "",
     amount: "",
-    keyword: "",
-    message: "",
   });
   const [transactionCount, setTransactionCount] = useState("");
 
@@ -47,6 +47,7 @@ export function AppWrapper({ children }) {
       const accounts = await ethereum.request({ method: "eth_accounts" });
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
+
         // getAllTransactions();
       } else {
         console.log("No Accounts");
@@ -64,7 +65,9 @@ export function AppWrapper({ children }) {
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
       });
-
+      // const transactionContract = getEthereumContract();
+      // const name = transactionContract.symbol();
+      // setCoinName(name);
       setCurrentAccount(accounts[0]);
     } catch (error) {
       console.log(error);
@@ -74,9 +77,10 @@ export function AppWrapper({ children }) {
 
   const sendTransaction = async () => {
     try {
+      setIsLoading(true);
       if (!ethereum) return alert("Please install metamask");
 
-      const { addressTo, amount, keyword, message } = formData;
+      const { addressTo, amount } = formData;
       const transactionContract = getEthereumContract();
 
       const parsedAmount = ethers.utils.parseEther(amount);
@@ -94,9 +98,7 @@ export function AppWrapper({ children }) {
       });
       const transactionHash = await transactionContract.addToBlockchain(
         addressTo,
-        parsedAmount,
-        message,
-        keyword
+        parsedAmount
       );
       console.log("Loading: ", transactionHash.hash);
       await transactionHash.wait();
@@ -104,6 +106,11 @@ export function AppWrapper({ children }) {
 
       const transactionCount = await transactionContract.getTransactionCount();
       setTransactionCount(transactionCount.toNumber());
+      setIsLoading(false);
+      setFormData({
+        addressTo: "",
+        amount: "",
+      });
     } catch (error) {
       console.log(error);
       throw new Error("No ethereum object.");
@@ -123,6 +130,8 @@ export function AppWrapper({ children }) {
         setFormData,
         formData,
         sendTransaction,
+        isLoading,
+        coinName,
       }}
     >
       {children}

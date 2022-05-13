@@ -14,7 +14,7 @@ const navigation = [
 
 const NavBar = ({ theme, setTheme }) => (
   <Popover>
-    <div className="relative py-6 px-4 sm:px-6 lg:px-8 dark:bg-gray-800">
+    <div className="relative py-6 px-4 sm:px-6 lg:px-8 dark:bg-gray-800 bg-gray-100">
       <nav
         className="relative max-w-7xl mx-auto flex items-center justify-between sm:h-10 "
         aria-label="Global"
