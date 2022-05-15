@@ -96,7 +96,7 @@ const FormSendCrypto = () => {
         </button>
       </form>
       {isLoading && (
-        <div className="absolute flex justify-center right-0 top-0 w-full h-full bg-indigo-100 opacity-75">
+        <div className="absolute flex justify-center rounded-lg right-0 top-0 w-full h-full bg-indigo-100 opacity-75">
           <Spinner />
         </div>
       )}
