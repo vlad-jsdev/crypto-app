@@ -26,7 +26,6 @@ const getEthereumContract = () => {
 
 export function AppWrapper({ children }) {
   const [currentAccount, setCurrentAccount] = useState("");
-  const [coinName, setCoinName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     addressTo: "",
@@ -65,16 +64,22 @@ export function AppWrapper({ children }) {
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
       });
-      // const transactionContract = getEthereumContract();
-      // const name = transactionContract.symbol();
-      // setCoinName(name);
       setCurrentAccount(accounts[0]);
     } catch (error) {
       console.log(error);
       throw new Error("No ethereum object.");
     }
   };
-
+  const getFunc = async () => {
+    try {
+      const contract = getEthereumContract();
+      const transaction = await contract.getTransactionCount();
+      console.log("All transactions: ", transaction);
+    } catch (error) {
+      console.log(error);
+      throw new Error("No ethereum object.");
+    }
+  };
   const sendTransaction = async () => {
     try {
       setIsLoading(true);
@@ -131,7 +136,7 @@ export function AppWrapper({ children }) {
         formData,
         sendTransaction,
         isLoading,
-        coinName,
+        getFunc,
       }}
     >
       {children}

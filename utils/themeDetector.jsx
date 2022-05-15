@@ -24,11 +24,6 @@ const useThemeDetector = () => {
     setIsDarkTheme(getCurrentTheme);
   }, []);
 
-  // useEffect(() => {
-  //   const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-  //   darkThemeMq.addListener(mqListener);
-  //   return () => darkThemeMq.removeListener(mqListener);
-  // }, []);
   return isDarkTheme;
 };
 

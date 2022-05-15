@@ -15,7 +15,7 @@ const FormSendCrypto = () => {
     sendTransaction();
   };
   return (
-    <div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 drop-shadow-2xl sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full p-4 lg:max-w-sm bg-white rounded-lg border border-gray-200 drop-shadow-2xl sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
       <h5 className="py-4 text-xl font-medium text-gray-900 dark:text-white">
         Send in one click
       </h5>
