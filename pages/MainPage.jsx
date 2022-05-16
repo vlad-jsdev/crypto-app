@@ -1,13 +1,10 @@
-import NavBar from "../components/NavBar";
 import Image from "next/image";
 import CryptoImg from "../assets/images/crypto.png";
 import MenuButton from "../components/MenuButton";
-import { walletButton } from "../constants/styles";
 import { useAppContext } from "../context/TransactionContext";
 import FormSendCrypto from "../components/FormSendCrypto";
 import MetamaskIcon from "../assets/images/metamask.svg";
 import CryptoCard from "../components/CryptoCard";
-import { useEffect, useState } from "react";
 
 const MainPage = () => {
   const { connectWallet, currentAccount, getFunc } = useAppContext();
@@ -18,7 +15,6 @@ const MainPage = () => {
         <div className="text-left">
           <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
             <span className="block dark:text-gray-300">Send Crypto</span>{" "}
-            {/*<br className="hidden lg:block" />*/}
             <span className="block text-indigo-600 xl:inline">
               across the world
             </span>
