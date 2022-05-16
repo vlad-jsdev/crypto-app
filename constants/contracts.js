@@ -1,4 +1,5 @@
-import abi from "../smart_contract/artifacts/contracts/Transaction.sol/Transaction.json";
+import abi from "/smart_contract/artifacts/contracts/Transaction.sol/Transaction.json";
+
 // import abiClient from "./Transaction.json";
 
 export const contractABI = abi.abi;
