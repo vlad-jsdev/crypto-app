@@ -6,7 +6,7 @@ import FormSendCrypto from "../components/FormSendCrypto";
 import MetamaskIcon from "../assets/images/metamask.svg";
 import CryptoCard from "../components/CryptoCard";
 
-const MainPage = () => {
+const Main = () => {
   const { connectWallet, currentAccount, getFunc } = useAppContext();
 
   return (
@@ -71,4 +71,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default Main;

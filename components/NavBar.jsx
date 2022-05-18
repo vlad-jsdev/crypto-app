@@ -6,9 +6,9 @@ import MenuButton from "./MenuButton";
 import ToggleMode from "./ToggleMode";
 
 const navigation = [
-  { name: "Cryptocurrency", href: "#" },
+  { name: "Cryptocurrency", href: "/cryptoCurencyPage" },
   { name: "NFTs", href: "#" },
-  { name: "Wallet", href: "#" },
+  { name: "Wallet", href: "/" },
   { name: "CryptoBot", href: "#" },
 ];
 
