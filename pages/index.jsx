@@ -1,11 +1,8 @@
-import Image from "next/image";
 import NavBar from "../components/NavBar";
 import Main from "./Main";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import useThemeDetector from "../utils/themeDetector";
-import { useAppContext } from "../context/TransactionContext";
-import FormSendCrypto from "../components/FormSendCrypto";
 
 export default function Home() {
   const isDarkTheme = useThemeDetector();
