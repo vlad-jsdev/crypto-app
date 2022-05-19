@@ -103,7 +103,7 @@ const CryptoCurency = () => {
                       >
                         <div className="flex flex-row">
                           <img
-                            src={`https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@bea1a9722a8c63169dcc06e86182bf2c55a76bbc/128/color/${img}.png`}
+                            src={`https://assets.coincap.io/assets/icons/${img}@2x.png`}
                             alt={crypto.symbol}
                             className="flex w-8"
                           />
