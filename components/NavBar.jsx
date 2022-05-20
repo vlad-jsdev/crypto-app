@@ -7,7 +7,7 @@ import ToggleMode from "./ToggleMode";
 import Link from "next/link";
 
 const navigation = [
-  { name: "Cryptocurrency", href: "/cryptoCurencyPage" },
+  { name: "Cryptocurrency", href: "/crypto-currency" },
   { name: "NFTs", href: "#" },
   { name: "Wallet", href: "/" },
   { name: "CryptoBot", href: "#" },

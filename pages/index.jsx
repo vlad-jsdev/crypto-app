@@ -1,5 +1,5 @@
 import NavBar from "../components/NavBar";
-import Main from "./Main";
+import Wallet from "../components/Wallet";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import useThemeDetector from "../utils/themeDetector";
@@ -23,7 +23,7 @@ export default function Home() {
         <NavBar theme={theme} setTheme={setLocalTheme} />
         <div className="max-w-7xl mx-auto h-full">
           <div className="flex flex-col z-10 pb-8 bg-white dark:bg-gray-700">
-            <Main />
+            <Wallet />
           </div>
         </div>
         <Footer />

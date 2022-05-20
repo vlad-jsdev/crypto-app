@@ -1,12 +1,12 @@
 import Image from "next/image";
 import CryptoImg from "../assets/images/crypto.png";
-import MenuButton from "../components/MenuButton";
+import MenuButton from "./MenuButton";
 import { useAppContext } from "../context/TransactionContext";
-import FormSendCrypto from "../components/FormSendCrypto";
+import FormSendCrypto from "./FormSendCrypto";
 import MetamaskIcon from "../assets/images/metamask.svg";
-import CryptoCard from "../components/CryptoCard";
+import CryptoCard from "./CryptoCard";
 
-const Main = () => {
+const Wallet = () => {
   const { connectWallet, currentAccount, getFunc } = useAppContext();
 
   return (
@@ -71,4 +71,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Wallet;

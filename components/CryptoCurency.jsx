@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 
 import Image from "next/image";
 import CryptoImg from "../assets/images/crypto-curency.png";
 import log from "tailwindcss/lib/util/log";
-import Spinner from "../components/Spinner";
+import Spinner from "./Spinner";
 
-const CryptoCurency = () => {
-  const [data, setData] = useState([]);
+const CryptoCurency = ({ startData }) => {
+  const [data, setData] = useState(startData);
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResult] = useState([]);
+  const [searchResults, setSearchResult] = useState(startData);
   const [toggle, setToggle] = useState(true);
   const [isLoading, setLoading] = useState(false);
-
   const sortCrypto = (type) => {
     if (type === "name") {
       searchResults.sort((a, b) => {
@@ -31,18 +30,21 @@ const CryptoCurency = () => {
     setToggle(!toggle);
     setSearchResult(searchResults);
   };
+
   useEffect(() => {
-    setLoading(true);
-    fetch("api/markets")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setData(data);
-        setSearchResult(data);
-        setLoading(false);
-      });
+    console.log(startData);
+    // setLoading(true);
+    // fetch("api/markets")
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     setData(data);
+    //     setSearchResult(data);
+    //     setLoading(false);
+    //   });
   }, []);
+
   const handlerChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -168,7 +170,7 @@ const CryptoCurency = () => {
                   .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ");
 
                 return (
-                  <>
+                  <Fragment key={crypto.symbol}>
                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-slate-100 hover:bg-gray-50 dark:hover:bg-gray-600">
                       <td className="px-6 py-4"># {crypto.rank}</td>
                       <th
@@ -206,7 +208,7 @@ const CryptoCurency = () => {
                         </a>
                       </td>
                     </tr>
-                  </>
+                  </Fragment>
                 );
               })}
             </tbody>
@@ -216,4 +218,5 @@ const CryptoCurency = () => {
     </main>
   );
 };
+
 export default CryptoCurency;
