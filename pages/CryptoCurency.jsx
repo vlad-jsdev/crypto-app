@@ -7,8 +7,30 @@ import Spinner from "../components/Spinner";
 
 const CryptoCurency = () => {
   const [data, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResult] = useState([]);
+  const [toggle, setToggle] = useState(true);
   const [isLoading, setLoading] = useState(false);
 
+  const sortCrypto = (type) => {
+    if (type === "name") {
+      searchResults.sort((a, b) => {
+        if (a[type].toLowerCase() < b[type].toLowerCase()) {
+          return toggle ? -1 : 1;
+        }
+        if (a[type].toLowerCase() > b[type].toLowerCase()) {
+          return toggle ? 1 : -1;
+        }
+        return 0;
+      });
+    } else {
+      searchResults.sort((a, b) =>
+        toggle ? b[type] - a[type] : a[type] - b[type]
+      );
+    }
+    setToggle(!toggle);
+    setSearchResult(searchResults);
+  };
   useEffect(() => {
     setLoading(true);
     fetch("api/markets")
@@ -17,9 +39,20 @@ const CryptoCurency = () => {
       })
       .then((data) => {
         setData(data);
+        setSearchResult(data);
         setLoading(false);
       });
   }, []);
+  const handlerChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+  useEffect(() => {
+    const results = data.filter((item) =>
+      item.name.toLowerCase().includes(searchTerm)
+    );
+    setSearchResult(results);
+  }, [searchTerm]);
+
   return (
     <main className="flex flex-col my-3 max-w-7xl px-4 sm:my-12 sm:px-6 md:my-16 lg:my-20 lg:px-8 xl:my-28">
       <div className="flex justify-center mb-12">
@@ -44,40 +77,80 @@ const CryptoCurency = () => {
           />
         </div>
       </div>
+      <div className="flex justify-center my-5 w-full">
+        <input
+          type="search"
+          id="default-search"
+          className="block p-3 pl-10 w-full sm:w-72 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Search Coin"
+          onChange={handlerChange}
+        />
+      </div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Price
-              </th>
-              <th scope="col" className="px-6 py-3">
-                24h %
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Market Cap
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Volume (24h)
-              </th>
-              <th scope="col" className="px-6 py-3">
-                VWAP (24h)
-              </th>
-              <th scope="col" className="px-6 py-3">
-                <span className="sr-only">Edit</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {isLoading ? (
-              <div>
-                <Spinner />
-              </div>
-            ) : (
-              data.map((crypto) => {
+        {isLoading ? (
+          <div className="flex justify-center">
+            <Spinner />
+          </div>
+        ) : (
+          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th
+                  scope="col"
+                  className="px-6 py-3 cursor-pointer"
+                  onClick={() => sortCrypto("rank")}
+                >
+                  #
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 cursor-pointer"
+                  onClick={() => sortCrypto("name")}
+                >
+                  Name
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 cursor-pointer"
+                  onClick={() => sortCrypto("priceUsd")}
+                >
+                  Price
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 cursor-pointer"
+                  onClick={() => sortCrypto("changePercent24Hr")}
+                >
+                  24h %
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 cursor-pointer"
+                  onClick={() => sortCrypto("marketCapUsd")}
+                >
+                  Market Cap
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 cursor-pointer"
+                  onClick={() => sortCrypto("volumeUsd24Hr")}
+                >
+                  Volume (24h)
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 cursor-pointer"
+                  onClick={() => sortCrypto("vwap24Hr")}
+                >
+                  VWAP (24h)
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  <span className="sr-only">Edit</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {searchResults.map((crypto, index) => {
                 let rounded = parseFloat(crypto.priceUsd)
                   .toFixed(2)
                   .toString()
@@ -97,6 +170,7 @@ const CryptoCurency = () => {
                 return (
                   <>
                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-slate-100 hover:bg-gray-50 dark:hover:bg-gray-600">
+                      <td className="px-6 py-4"># {crypto.rank}</td>
                       <th
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
@@ -113,7 +187,13 @@ const CryptoCurency = () => {
                         </div>
                       </th>
                       <td className="px-6 py-4">$ {rounded}</td>
-                      <td className="px-6 py-4">{percent24}%</td>
+                      <td
+                        className={`px-6 py-4 ${
+                          percent24 < 0 ? "text-red-500" : "text-green-500"
+                        }`}
+                      >
+                        {percent24}%
+                      </td>
                       <td className="px-6 py-4">$ {marketCup}</td>
                       <td className="px-6 py-4">$ {volume}</td>
                       <td className="px-6 py-4">$ {vwap}</td>
@@ -128,10 +208,10 @@ const CryptoCurency = () => {
                     </tr>
                   </>
                 );
-              })
-            )}
-          </tbody>
-        </table>
+              })}
+            </tbody>
+          </table>
+        )}
       </div>
     </main>
   );
