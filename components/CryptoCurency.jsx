@@ -50,7 +50,7 @@ const CryptoCurency = ({ startData }) => {
 
   const handlerChange = (e) => {
     setType("");
-    setSearchTerm(e.target.value);
+    setSearchTerm(e.target.value.toLowerCase());
   };
   useEffect(() => {
     const results = data.filter((item) =>
