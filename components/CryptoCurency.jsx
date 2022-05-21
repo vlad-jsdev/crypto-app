@@ -29,7 +29,7 @@ const CryptoCurency = ({ startData }) => {
   const [isLoading, setLoading] = useState(false);
   const sortCrypto = (type) => {
     setType(type);
-    if (type === "name") {
+    if (type === nameProp) {
       searchResults.sort((a, b) => {
         if (a[type].toLowerCase() < b[type].toLowerCase()) {
           return toggle ? -1 : 1;
