@@ -4,6 +4,7 @@ import Spinner from "./Spinner";
 import CryptoThTitle from "./CryptoThTitle";
 import CryptoLine from "./CryptoLine";
 import {
+  allCoinsData,
   changePercent24Hr,
   hash,
   market,
@@ -19,14 +20,17 @@ import {
   vwap,
   vwap24Hr,
 } from "../constants/constans";
+import { SITE_URL } from "../constants/urls";
 
 const CryptoCurency = ({ startData }) => {
-  const [data, setData] = useState(startData);
   const [searchTerm, setSearchTerm] = useState("");
   const [isType, setType] = useState("");
   const [searchResults, setSearchResult] = useState(startData);
   const [toggle, setToggle] = useState(true);
   const [isLoading, setLoading] = useState(false);
+  const [itemsLoaded, setItemsLoaded] = useState(50);
+  const [loadingButton, setLoadingButton] = useState(false);
+
   const sortCrypto = (type) => {
     setType(type);
     if (type === nameProp) {
@@ -49,15 +53,35 @@ const CryptoCurency = ({ startData }) => {
   };
 
   const handlerChange = (e) => {
+    if (e.target.value.trim() === "") {
+      setSearchResult(startData);
+    } else {
+      setSearchTerm(e.target.value.toLowerCase());
+    }
     setType("");
-    setSearchTerm(e.target.value.toLowerCase());
   };
-  useEffect(() => {
-    const results = data.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm)
+  async function searchCrypto() {
+    const response = await fetch(
+      `https://api.coincap.io/v2/assets?search=${searchTerm}`
     );
-    setSearchResult(results);
+    const foundCrypto = await response.json();
+    setSearchResult(foundCrypto.data);
+  }
+  useEffect(() => {
+    if (searchTerm !== "") {
+      searchCrypto();
+    }
   }, [searchTerm]);
+
+  const showMore = async () => {
+    setLoadingButton(true);
+    setItemsLoaded(itemsLoaded + 50);
+    const res = await fetch(SITE_URL + `/api/markets/${itemsLoaded + 50}`);
+    const startData = await res.json();
+
+    setSearchResult(startData);
+    setLoadingButton(false);
+  };
 
   return (
     <main className="flex flex-col my-3 max-w-7xl px-4 sm:my-12 sm:px-6 md:my-16 lg:my-20 lg:px-8 xl:my-28">
@@ -89,7 +113,7 @@ const CryptoCurency = ({ startData }) => {
           id="default-search"
           className="block p-3 pl-10 w-full sm:w-72 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Search Coin"
-          onChange={handlerChange}
+          onChange={(e) => handlerChange(e)}
         />
       </div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -168,7 +192,7 @@ const CryptoCurency = ({ startData }) => {
                   rank,
                 }) => (
                   <CryptoLine
-                    key={symbol}
+                    key={name}
                     name={name}
                     symbol={symbol}
                     priceUsd={priceUsd}
@@ -183,6 +207,16 @@ const CryptoCurency = ({ startData }) => {
             </tbody>
           </table>
         )}
+      </div>
+      <div className="flex justify-center">
+        <button
+          type="button"
+          onClick={showMore}
+          disabled={loadingButton}
+          className="m-5 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          {loadingButton ? <Spinner height="h-5" /> : "View more"}
+        </button>
       </div>
     </main>
   );

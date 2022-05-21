@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import useThemeDetector from "../utils/themeDetector";
 import CryptoCurency from "../components/CryptoCurency";
 import { SITE_URL } from "../constants/urls";
+import { allCoinsData } from "../constants/constans";
 
 export default function Home({ startData }) {
   const isDarkTheme = useThemeDetector();
@@ -34,7 +35,7 @@ export default function Home({ startData }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch(SITE_URL + "/api/markets");
+  const res = await fetch(SITE_URL + "/api/markets/50");
   const startData = await res.json();
   return {
     props: { startData }, // will be passed to the page component as props
