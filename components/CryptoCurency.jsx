@@ -21,6 +21,7 @@ import {
   vwap24Hr,
 } from "../constants/constans";
 import { SITE_URL } from "../constants/urls";
+import CryptoChart from "./CryptoChart";
 
 const CryptoCurency = ({ startData }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -54,8 +55,10 @@ const CryptoCurency = ({ startData }) => {
 
   const handlerChange = (e) => {
     if (e.target.value.trim() === "") {
+      setLoadingButton(false);
       setSearchResult(startData);
     } else {
+      setLoadingButton(true);
       setSearchTerm(e.target.value.toLowerCase());
     }
     setType("");
@@ -217,6 +220,10 @@ const CryptoCurency = ({ startData }) => {
         >
           {loadingButton ? <Spinner height="h-5" /> : "View more"}
         </button>
+      </div>
+      <div>
+        {" "}
+        <CryptoChart />
       </div>
     </main>
   );
