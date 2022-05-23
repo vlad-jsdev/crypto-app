@@ -1,6 +1,6 @@
 import { Line } from "react-chartjs-2";
 import { useEffect, useState } from "react";
-
+// #a5b4fc
 const data = {
   labels: [],
   datasets: [
@@ -14,16 +14,16 @@ const options = {
 
   plugins: {
     legend: {
-      position: "top",
+      display: false,
     },
   },
   elements: {
     line: {
       tension: 0,
       borderWidth: 2,
-      borderColor: "rgba(47,49,68,1)",
+      borderColor: "rgba(134,239,172,1)",
       fill: "start",
-      backgroundColor: "rgba(47,97,68,0.3)",
+      backgroundColor: "rgba(134,239,172,0.3)",
     },
     point: {
       radius: 0,
@@ -40,13 +40,13 @@ const options = {
   },
 };
 
-const CryptoChart = () => {
+const CryptoChart = ({ symbol }) => {
   const [time, setTime] = useState(Date.now());
   const [dataChart, setData] = useState(data);
   const round = (a, b) => (a - (a % b)) / b;
   useEffect(() => {
     const start = round(time - 86400, 1000);
-    fetch(`/api/chart/USDT/BTC/${start - 86400}/${time}`)
+    fetch(`/api/chart/USDT/${symbol}/${start - 86400}/${time}`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);

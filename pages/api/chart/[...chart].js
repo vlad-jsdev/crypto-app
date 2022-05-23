@@ -28,8 +28,9 @@ export default async function chart(req, res) {
       {
         data: data.map((item) => item.close),
         pointStyle: "circle",
-        pointRadius: 4,
-        pointHoverRadius: 10,
+        pointBackgroundColor: "green",
+        pointRadius: 3,
+        pointHoverRadius: 5,
       },
     ],
   };

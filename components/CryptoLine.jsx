@@ -1,4 +1,7 @@
 import { replaceNum } from "../constants/constans";
+import { Disclosure } from "@headlessui/react";
+import { useEffect, useState } from "react";
+import DetailsChart from "./DetailsChart";
 
 const CryptoLine = ({
   name,
@@ -10,6 +13,15 @@ const CryptoLine = ({
   vwap24Hr,
   rank,
 }) => {
+  const [open, setOpen] = useState(false);
+  const openMore = () => {
+    setOpen(!open);
+  };
+  // useEffect(() => {
+  //   if (open) {
+  //     console.log("HEre");
+  //   }
+  // }, [open]);
   const rounded = parseFloat(priceUsd)
     .toFixed(2)
     .toString()
@@ -24,7 +36,10 @@ const CryptoLine = ({
 
   return (
     <>
-      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-slate-100 hover:bg-indigo-300 dark:hover:bg-indigo-600 dark:odd:bg-gray-800 dark:even:bg-gray-700">
+      <tr
+        className="cursor-pointer bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-slate-100 hover:bg-indigo-300 dark:hover:bg-indigo-600 dark:odd:bg-gray-800 dark:even:bg-gray-700"
+        onClick={openMore}
+      >
         <td className="px-6 py-4"># {rank}</td>
         <th
           scope="row"
@@ -53,12 +68,14 @@ const CryptoLine = ({
         <td className="px-6 py-4 text-right">
           <a
             href="#"
-            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            className="font-medium text-blue-600 dark:text-blue-500
+              hover:underline"
           >
             More...
           </a>
         </td>
       </tr>
+      {open && <DetailsChart symbol={symbol} />}
     </>
   );
 };

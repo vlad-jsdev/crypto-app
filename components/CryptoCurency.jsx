@@ -71,6 +71,8 @@ const CryptoCurency = ({ startData }) => {
     setSearchResult(foundCrypto.data);
   }
   useEffect(() => {
+    console.log(startData);
+
     if (searchTerm !== "") {
       searchCrypto();
     }
@@ -220,10 +222,6 @@ const CryptoCurency = ({ startData }) => {
         >
           {loadingButton ? <Spinner height="h-5" /> : "View more"}
         </button>
-      </div>
-      <div>
-        {" "}
-        <CryptoChart />
       </div>
     </main>
   );
