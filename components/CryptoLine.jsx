@@ -14,14 +14,15 @@ const CryptoLine = ({
   rank,
 }) => {
   const [open, setOpen] = useState(false);
+  const [imgUrl, setImgUrl] = useState("");
   const openMore = () => {
     setOpen(!open);
   };
-  // useEffect(() => {
-  //   if (open) {
-  //     console.log("HEre");
-  //   }
-  // }, [open]);
+  const imageError = (e) => {
+    e.target.src =
+      "https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg";
+  };
+
   const rounded = parseFloat(priceUsd)
     .toFixed(2)
     .toString()
@@ -48,6 +49,7 @@ const CryptoLine = ({
           <div className="flex flex-row">
             <img
               src={`https://assets.coincap.io/assets/icons/${img}@2x.png`}
+              onError={imageError}
               alt={symbol}
               className="flex w-8"
             />
