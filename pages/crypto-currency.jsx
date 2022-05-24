@@ -3,8 +3,6 @@ import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import useThemeDetector from "../utils/themeDetector";
 import CryptoCurency from "../components/CryptoCurency";
-import { SITE_URL } from "../constants/urls";
-import { allCoinsData } from "../constants/constans";
 
 export default function CryptoCurrencyPage({ startData }) {
   const isDarkTheme = useThemeDetector();
