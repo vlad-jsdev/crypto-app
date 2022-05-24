@@ -11,7 +11,10 @@ const data = {
 };
 const options = {
   responsive: true,
-
+  interaction: {
+    intersect: false,
+    mode: "index",
+  },
   plugins: {
     legend: {
       display: false,
