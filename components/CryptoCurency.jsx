@@ -64,11 +64,9 @@ const CryptoCurency = ({ startData }) => {
     setType("");
   };
   async function searchCrypto() {
-    const response = await fetch(
-      `https://api.coincap.io/v2/assets?search=${searchTerm}`
-    );
+    const response = await fetch(`/api/markets/${searchTerm}`);
     const foundCrypto = await response.json();
-    setSearchResult(foundCrypto.data);
+    setSearchResult(foundCrypto);
   }
   useEffect(() => {
     console.log(startData);
