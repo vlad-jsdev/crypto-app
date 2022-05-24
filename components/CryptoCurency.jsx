@@ -64,9 +64,11 @@ const CryptoCurency = ({ startData }) => {
     setType("");
   };
   async function searchCrypto() {
-    const response = await fetch(`/api/markets/${searchTerm}`);
+    const response = await fetch(
+      `https://api.coincap.io/v2/assets?search=${searchTerm}`
+    );
     const foundCrypto = await response.json();
-    setSearchResult(foundCrypto);
+    setSearchResult(foundCrypto.data);
   }
   useEffect(() => {
     console.log(startData);
@@ -79,7 +81,7 @@ const CryptoCurency = ({ startData }) => {
   const showMore = async () => {
     setLoadingButton(true);
     setItemsLoaded(itemsLoaded + 50);
-    const res = await fetch(SITE_URL + `/api/markets/${itemsLoaded + 50}`);
+    const res = await fetch(`/api/markets/${itemsLoaded + 50}`);
     const startData = await res.json();
 
     setSearchResult(startData);
