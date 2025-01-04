@@ -4,21 +4,20 @@ import { allCoinsData } from "../../../constants/constans";
 
 const options = {
   method: "GET",
-  redirect: "follow",
 };
 
 export default async function chart(req, res) {
   const { chart } = req.query;
   console.log(chart);
   const data = await fetch(
-    `https://poloniex.com/public?command=returnChartData&currencyPair=${chart[0]}_${chart[1]}&start=${chart[2]}&end=${chart[3]}&period=900`,
+    `https://api.poloniex.com/markets/${chart[1]}_${chart[0]}/trades?interval=DAY_1&startTime=${chart[2]}&endTime=${chart[3]}&limit=200`,
     options
   )
     .then((response) => response.json())
     .catch((err) => console.error(err));
   const formatedData = {
     labels: data.map((item) => {
-      const dateObject = new Date(item.date * 1000);
+      const dateObject = new Date(item.ts * 1000);
       return dateObject.toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
@@ -26,7 +25,7 @@ export default async function chart(req, res) {
     }),
     datasets: [
       {
-        data: data.map((item) => item.close),
+        data: data.map((item) => item.price),
         pointStyle: "circle",
         pointBackgroundColor: "green",
         pointRadius: 3,
