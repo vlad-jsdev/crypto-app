@@ -71,8 +71,6 @@ const CryptoCurency = ({ startData }) => {
     setSearchResult(foundCrypto.data);
   }
   useEffect(() => {
-    console.log(startData);
-
     if (searchTerm !== "") {
       searchCrypto();
     }

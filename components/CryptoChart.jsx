@@ -51,8 +51,7 @@ const CryptoChart = ({ symbol }) => {
   useEffect(() => {
     const start = round(time - 86400, 1000);
     fetch(
-      `/api/chart/${
-        symbol === "USDT" ? secondCrypto[1] : secondCrypto[0]
+      `/api/chart/${symbol === "USDT" ? secondCrypto[1] : secondCrypto[0]
       }/${symbol}/${start - 86400}/${time}`
     )
       .then((res) => res.json())

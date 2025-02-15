@@ -10,14 +10,15 @@ export default async function chart(req, res) {
   const { chart } = req.query;
   console.log(chart);
   const data = await fetch(
-    `https://api.poloniex.com/markets/${chart[1]}_${chart[0]}/trades?interval=DAY_1&startTime=${chart[2]}&endTime=${chart[3]}&limit=200`,
+    `https://api.poloniex.com/markets/${chart[1]}_${chart[0]}/trades?interval=MINUTE_15&startTime=${chart[2]}&endTime=${chart[3]}&limit=50`,
     options
   )
     .then((response) => response.json())
     .catch((err) => console.error(err));
   const formatedData = {
     labels: data.map((item) => {
-      const dateObject = new Date(item.ts * 1000);
+      const dateObject = new Date(item.ts);
+      console.log('Time: ', dateObject);
       return dateObject.toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
